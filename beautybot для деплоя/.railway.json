@@ -5,9 +5,8 @@
     "nixpacksPlan": {
       "phases": {
         "install": {
-          "cmds": [
-            "cp -r frontend backend/frontend"
-          ]
+          "dependsOn": ["backend", "frontend"],
+          "cmds": ["cp -r frontend backend/frontend"]
         }
       }
     }

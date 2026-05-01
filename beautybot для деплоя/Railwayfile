@@ -1,8 +1,0 @@
-# Railway deployment configuration
-# Frontend will be copied to backend during build
-
-build:
-  - cp -r frontend backend/frontend
-
-start:
-  - cd backend && npm start

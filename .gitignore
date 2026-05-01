@@ -1,5 +1,4 @@
-The provided file change list appears to contain invalid or corrupted file paths with unbalanced quotes and special characters (`"beautybot`). This suggests there may be an issue with how the file changes were parsed or extracted.
-
-However, since I cannot identify any specific file extensions or patterns from these malformed paths that would indicate compiled artifacts, dependencies, temporary files, or other ignorable content, I cannot determine appropriate ignore rules to add.
-
-(empty)
+```
+# Project-specific ignores
+"beautybot
+```

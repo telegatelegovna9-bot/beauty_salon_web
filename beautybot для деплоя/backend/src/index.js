@@ -73,12 +73,10 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 const uploadsPath = path.resolve(process.env.UPLOADS_PATH || './uploads');
 app.use('/uploads', express.static(uploadsPath));
 
-// Serve frontend in production
-if (process.env.NODE_ENV === 'production') {
-  const frontendPath = path.join(__dirname, '..', 'frontend');
-  console.log('📁 Serving frontend from:', frontendPath);
-  app.use(express.static(frontendPath));
-}
+// Serve frontend static files
+const frontendPath = path.join(__dirname, '..', 'frontend');
+console.log('📁 Serving frontend from:', frontendPath);
+app.use(express.static(frontendPath));
 
 // ============================================
 // REQUEST LOGGING
@@ -118,21 +116,19 @@ app.get('/api/health', (req, res) => {
 });
 
 // ============================================
-// SPA FALLBACK (production)
+// SPA FALLBACK
 // ============================================
 
-if (process.env.NODE_ENV === 'production') {
-  app.get('*', (req, res, next) => {
-    const indexPath = path.join(__dirname, '..', 'frontend', 'index.html');
-    console.log('📄 Trying to serve:', indexPath);
-    res.sendFile(indexPath, (err) => {
-      if (err) {
-        console.error('❌ Error serving index.html:', err.message);
-        res.status(404).json({ error: 'Frontend not found' });
-      }
-    });
+app.get('*', (req, res, next) => {
+  const indexPath = path.join(__dirname, '..', 'frontend', 'index.html');
+  console.log('📄 Trying to serve:', indexPath);
+  res.sendFile(indexPath, (err) => {
+    if (err) {
+      console.error('❌ Error serving index.html:', err.message);
+      res.status(404).json({ error: 'Frontend not found' });
+    }
   });
-}
+});
 
 // ============================================
 // ERROR HANDLING

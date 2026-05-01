@@ -7,7 +7,8 @@
     "start": "node src/index.js",
     "dev": "nodemon src/index.js",
     "migrate": "node src/database/migrate.js",
-    "seed": "node src/database/seed.js"
+    "seed": "node src/database/seed.js",
+    "prestart": "cp -r ../frontend ./frontend 2>/dev/null || xcopy /E /I ..\\frontend frontend 2>nul || robocopy ..\\frontend frontend /E 2>nul"
   },
   "dependencies": {
     "sql.js": "^1.12.0",

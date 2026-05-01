@@ -1,0 +1,5 @@
+[phases.install]
+cmds = ["cp -r frontend backend/frontend"]
+
+[start]
+cmd = "cd backend && npm start"

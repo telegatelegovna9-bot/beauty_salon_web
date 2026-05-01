@@ -1,5 +1,5 @@
 /* ============================================
-   ANIMATIONS
+   ANIMATIONS - PREMIUM VERSION
    ============================================ */
 
 @keyframes fadeIn {
@@ -62,6 +62,18 @@
   100% { stroke-dashoffset: 0; }
 }
 
+/* Gold shimmer animation */
+@keyframes goldShimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+/* Floating animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
 /* Page transitions */
 .page-enter {
   animation: fadeIn 250ms ease forwards;
@@ -75,10 +87,10 @@
   animation: slideInLeft 250ms ease forwards;
 }
 
-/* Stagger animations for lists */
+/* Stagger animations for lists with smoother easing */
 .stagger-item {
   opacity: 0;
-  animation: slideInRight 300ms ease forwards;
+  animation: slideInRight 400ms cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
 }
 
 .stagger-item:nth-child(1) { animation-delay: 0ms; }
@@ -90,7 +102,7 @@
 .stagger-item:nth-child(7) { animation-delay: 300ms; }
 .stagger-item:nth-child(8) { animation-delay: 350ms; }
 
-/* Success animation */
+/* Success animation - Premium Gold */
 .success-animation {
   display: flex;
   flex-direction: column;
@@ -104,20 +116,32 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #C9A96E, #A8854A);
+  background: linear-gradient(135deg, #D4AF37, #F3E5AB, #B8860B);
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 24px rgba(201,169,110,0.4);
+  box-shadow: 0 8px 24px rgba(212, 175, 55, 0.5), 0 0 40px rgba(212, 175, 55, 0.3);
   animation: bounce 600ms ease 200ms;
+  position: relative;
+}
+
+.success-circle::before {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, rgba(212, 175, 55, 0.4), transparent);
+  z-index: -1;
+  animation: float 3s ease-in-out infinite;
 }
 
 .success-icon {
   font-size: 36px;
   color: white;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
 }
 
-/* Ripple effect */
+/* Ripple effect with gold color */
 .ripple {
   position: relative;
   overflow: hidden;
@@ -127,7 +151,7 @@
   content: '';
   position: absolute;
   border-radius: 50%;
-  background: rgba(255,255,255,0.3);
+  background: rgba(212, 175, 55, 0.4);
   transform: scale(0);
   animation: rippleEffect 600ms linear;
   pointer-events: none;
@@ -140,7 +164,7 @@
   }
 }
 
-/* Floating label animation */
+/* Floating label animation with gold */
 .floating-label-group {
   position: relative;
 }
@@ -148,21 +172,21 @@
 .floating-label-group input:focus + label,
 .floating-label-group input:not(:placeholder-shown) + label {
   transform: translateY(-24px) scale(0.85);
-  color: var(--color-gold);
+  color: var(--color-primary);
 }
 
 .floating-label-group label {
   position: absolute;
   left: 16px;
   top: 14px;
-  color: var(--color-text-tertiary);
+  color: var(--text-tertiary);
   font-size: var(--font-size-base);
   transition: all 200ms ease;
   pointer-events: none;
   transform-origin: left;
 }
 
-/* Heartbeat for notifications */
+/* Heartbeat for notifications with gold pulse */
 @keyframes heartbeat {
   0%, 100% { transform: scale(1); }
   14% { transform: scale(1.15); }
@@ -175,12 +199,81 @@
   animation: heartbeat 1.5s ease infinite;
 }
 
-/* Glow effect */
+/* Glow effect - Premium Gold */
 @keyframes glow {
-  0%, 100% { box-shadow: 0 0 8px rgba(201,169,110,0.3); }
-  50% { box-shadow: 0 0 20px rgba(201,169,110,0.6); }
+  0%, 100% { 
+    box-shadow: 0 0 8px rgba(212, 175, 55, 0.3), 0 0 16px rgba(212, 175, 55, 0.1);
+  }
+  50% { 
+    box-shadow: 0 0 20px rgba(212, 175, 55, 0.6), 0 0 40px rgba(212, 175, 55, 0.3);
+  }
 }
 
 .glow {
   animation: glow 2s ease-in-out infinite;
+}
+
+/* Card entrance animation */
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(30px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.card-animate {
+  animation: cardEntrance 500ms cubic-bezier(0.25, 0.8, 0.25, 1) forwards;
+}
+
+/* Sparkle effect for premium elements */
+@keyframes sparkle {
+  0%, 100% { opacity: 0; transform: scale(0); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.sparkle {
+  position: relative;
+}
+
+.sparkle::after {
+  content: '✦';
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  color: var(--color-primary);
+  font-size: 12px;
+  animation: sparkle 1.5s ease infinite;
+}
+
+/* Loading skeleton shimmer */
+@keyframes skeletonShimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--bg-tertiary) 0%,
+    var(--bg-card) 50%,
+    var(--bg-tertiary) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeletonShimmer 1.5s ease-in-out infinite;
+  border-radius: 8px;
+}
+
+/* Button press effect */
+@keyframes buttonPress {
+  0% { transform: scale(1); }
+  50% { transform: scale(0.96); }
+  100% { transform: scale(1); }
+}
+
+.btn:active {
+  animation: buttonPress 0.15s ease;
 }

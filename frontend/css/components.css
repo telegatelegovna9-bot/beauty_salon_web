@@ -1,0 +1,386 @@
+/* ============================================
+   ADDITIONAL COMPONENT STYLES
+   ============================================ */
+
+/* Portfolio grid items */
+.portfolio-grid .portfolio-item {
+  background: var(--color-bg-secondary);
+}
+
+/* Avatar image fallback */
+.master-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Smooth page transitions */
+.page {
+  will-change: opacity;
+}
+
+/* Safe area for bottom nav */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .bottom-nav {
+    padding-bottom: calc(8px + env(safe-area-inset-bottom));
+  }
+  .page-container {
+    padding-bottom: calc(72px + env(safe-area-inset-bottom));
+  }
+}
+
+/* Telegram WebApp specific */
+.tg-viewport-stable {
+  height: 100vh;
+  height: var(--tg-viewport-stable-height, 100vh);
+}
+
+/* Input focus ring */
+.form-input:focus {
+  outline: none;
+}
+
+/* Prevent text selection on interactive elements */
+.btn, .nav-item, .service-card, .master-card, .booking-card,
+.calendar-day, .time-slot, .category-tab, .menu-item {
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Smooth scroll */
+.page-container {
+  scroll-behavior: smooth;
+}
+
+/* Loading state for buttons */
+.btn.loading {
+  position: relative;
+  color: transparent;
+}
+
+.btn.loading::after {
+  content: '';
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+}
+
+/* Sticky section header */
+.sticky-header {
+  position: sticky;
+  top: 0;
+  background: var(--color-bg);
+  z-index: 10;
+  padding: var(--space-sm) var(--space-md);
+  border-bottom: 1px solid var(--color-border-lighter);
+}
+
+/* Pull to refresh indicator */
+.ptr-indicator {
+  text-align: center;
+  padding: var(--space-md);
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-sm);
+}
+
+/* Image placeholder */
+.img-placeholder {
+  background: linear-gradient(135deg, var(--color-bg-secondary), var(--color-border-light));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-tertiary);
+  font-size: 24px;
+}
+
+/* Notification badge */
+.badge-count {
+  position: absolute;
+  top: -4px;
+  right: -4px;
+  min-width: 18px;
+  height: 18px;
+  background: var(--color-error);
+  color: white;
+  border-radius: var(--radius-full);
+  font-size: 10px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+}
+
+/* Swipe hint */
+.swipe-hint {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-xs);
+  padding: var(--space-sm);
+}
+
+/* Price tag */
+.price-tag {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-primary-lighter);
+  color: var(--color-primary-dark);
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+}
+
+/* Horizontal scroll container */
+.h-scroll {
+  display: flex;
+  gap: var(--space-md);
+  overflow-x: auto;
+  scrollbar-width: none;
+  padding: 0 var(--space-md);
+  -webkit-overflow-scrolling: touch;
+}
+
+.h-scroll::-webkit-scrollbar { display: none; }
+
+/* Compact booking item */
+.booking-item-compact {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-md) 0;
+  border-bottom: 1px solid var(--color-border-lighter);
+  cursor: pointer;
+}
+
+.booking-item-compact:last-child {
+  border-bottom: none;
+}
+
+.booking-time-badge {
+  background: var(--color-primary);
+  color: white;
+  padding: 6px 10px;
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-sm);
+  font-weight: 700;
+  flex-shrink: 0;
+  min-width: 52px;
+  text-align: center;
+}
+
+/* Floating bottom action */
+.bottom-action {
+  position: sticky;
+  bottom: 0;
+  background: var(--color-surface);
+  padding: var(--space-md);
+  border-top: 1px solid var(--color-border-lighter);
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.04);
+}
+
+/* Responsive grid */
+@media (min-width: 480px) {
+  .stats-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .time-slots-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+/* ============================================
+   AVATAR UPLOAD BUTTON
+   ============================================ */
+
+.avatar-upload-wrapper {
+  position: relative;
+  display: inline-flex;
+}
+
+.avatar-upload-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  background: rgba(0,0,0,0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  cursor: pointer;
+}
+
+.avatar-upload-wrapper:hover .avatar-upload-overlay,
+.avatar-upload-wrapper:active .avatar-upload-overlay {
+  opacity: 1;
+}
+
+.avatar-upload-overlay svg {
+  width: 24px;
+  height: 24px;
+  color: white;
+}
+
+/* ============================================
+   PORTFOLIO ADMIN CARDS
+   ============================================ */
+
+.portfolio-admin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--space-sm);
+}
+
+.portfolio-admin-item {
+  background: var(--color-surface);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border-lighter);
+  position: relative;
+}
+
+.portfolio-admin-item img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: cover;
+}
+
+.portfolio-admin-item-actions {
+  position: absolute;
+  top: var(--space-xs);
+  right: var(--space-xs);
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.portfolio-admin-item:hover .portfolio-admin-item-actions,
+.portfolio-admin-item:active .portfolio-admin-item-actions {
+  opacity: 1;
+}
+
+.portfolio-admin-item-info {
+  padding: var(--space-sm);
+}
+
+.portfolio-admin-item-title {
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* ============================================
+   FILE INPUT STYLING
+   ============================================ */
+
+.file-input-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-flex;
+}
+
+.file-input-wrapper input[type="file"] {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+/* ============================================
+   SECTION WITH BACKGROUND
+   ============================================ */
+
+.section-soft-bg {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+}
+
+/* ============================================
+   CONFIRMATION DIALOG
+   ============================================ */
+
+.confirm-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 8500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  animation: fadeIn var(--transition-fast);
+}
+
+.confirm-dialog {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  padding: var(--space-lg);
+  max-width: 320px;
+  width: 100%;
+  text-align: center;
+  box-shadow: var(--shadow-xl);
+  animation: scaleIn var(--transition-base) ease;
+}
+
+.confirm-dialog-icon {
+  font-size: 40px;
+  margin-bottom: var(--space-md);
+}
+
+.confirm-dialog-title {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: var(--space-sm);
+}
+
+.confirm-dialog-text {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-lg);
+  line-height: 1.5;
+}
+
+.confirm-dialog-actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.confirm-dialog-actions .btn {
+  flex: 1;
+}
+
+/* ============================================
+   FILTER SECTION
+   ============================================ */
+
+.filter-section {
+  padding: var(--space-md);
+  padding-bottom: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-count {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}

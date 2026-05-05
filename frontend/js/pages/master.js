@@ -29,24 +29,27 @@ const MasterDetailPage = {
 
       container.innerHTML = `
         <!-- Master Header -->
-        <div style="background:linear-gradient(135deg,#FFB6C1,#FF69B4);padding:var(--space-xl) var(--space-md);color:white;text-align:center">
-          <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#FFB6C1,#FF69B4);display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;color:white;border:2px solid rgba(255,105,180,0.4);margin:0 auto var(--space-md)">
-            ${master.avatar_url
-              ? `<img src="${master.avatar_url}" style="width:80px;height:80px;border-radius:50%;object-fit:cover">`
-              : Utils.getInitials(name)}
+        <div class="profile-header">
+          <div class="profile-avatar-wrapper">
+            <div class="profile-avatar" style="overflow:hidden">
+              ${master.avatar_url
+                ? `<img src="${master.avatar_url}" alt="${name}" style="width:100%;height:100%;object-fit:cover">`
+                : Utils.getInitials(name)}
+            </div>
           </div>
-          <div style="font-size:var(--font-size-xl);font-weight:700;margin-bottom:4px">${name}</div>
-          ${specs.length > 0 ? `<div style="color:var(--color-primary-light);font-size:var(--font-size-sm)">${specs.join(' · ')}</div>` : ''}
+          <div class="profile-name">${name}</div>
+          ${specs.length > 0 ? `<div class="profile-role">${specs.join(' · ')}</div>` : ''}
           ${master.rating ? `
-            <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px">
-              <span style="color:var(--color-primary);font-size:18px">★</span>
-              <span style="font-weight:600">${master.rating.toFixed(1)}</span>
-              <span style="color:rgba(255,255,255,0.7)">(${master.reviews_count} отзывов)</span>
+            <div class="master-card-rating">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#FF69B4" stroke="#FF69B4" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              <span class="master-card-rating-value">${master.rating.toFixed(1)}</span>
+              <span class="master-card-rating-count">(${master.reviews_count} отзывов)</span>
             </div>
           ` : ''}
-          ${master.bio ? `<div style="color:rgba(255,255,255,0.9);font-size:var(--font-size-sm);margin-top:var(--space-sm);line-height:1.6">${master.bio}</div>` : ''}
-          <button class="btn btn-primary" style="margin-top:var(--space-md)" onclick="App.navigate('book', { masterId: ${master.id} })">
-            💅 Записаться
+          ${master.bio ? `<div class="master-card-bio">${master.bio}</div>` : ''}
+          <button class="btn btn-primary master-card-book-btn" onclick="App.navigate('book', { masterId: ${master.id} })">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Записаться
           </button>
         </div>
 

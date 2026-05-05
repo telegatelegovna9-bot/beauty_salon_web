@@ -1819,6 +1819,43 @@ a {
   }
 }
 
+/* Master card specific styles */
+.master-card-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.master-card-rating-value {
+  font-weight: 700;
+  color: #FF1493;
+}
+
+.master-card-rating-count {
+  color: #B0A0B0;
+}
+
+.master-card-bio {
+  color: #8A7A8A;
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+  text-align: center;
+  max-width: 300px;
+}
+
+.master-card-book-btn {
+  margin-top: var(--space-sm);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 32px;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+}
+
 /* ============================================
    MENU LIST
    ============================================ */

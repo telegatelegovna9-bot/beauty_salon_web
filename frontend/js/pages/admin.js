@@ -2,6 +2,25 @@
 // ADMIN PAGE
 // ============================================
 
+const AdminIcons = {
+  dashboard: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
+  calendar: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>',
+  masters: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>',
+  users: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>',
+  key: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 1 1-7.78 7.78 5.5 5.5 0 0 1 7.78-7.78zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg>',
+  scissors: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>',
+  folder: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg>',
+  edit: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF69B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>',
+  trash: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF69B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg>',
+  check: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+  x: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+  copy: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF69B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>',
+  camera: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF69B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>',
+  warning: '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#FF69B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>',
+  nail: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 2 6 5 6 9c0 4 2 8 6 13 4-5 6-9 6-13 0-4-2-7-6-7z"/></svg>',
+  service: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>',
+};
+
 const AdminPage = {
   activeTab: 'dashboard',
 
@@ -11,18 +30,18 @@ const AdminPage = {
         <!-- Admin Tabs -->
         <div style="display:flex;overflow-x:auto;background:var(--color-surface);border-bottom:1px solid var(--color-border-light);scrollbar-width:none">
           ${[
-            { key: 'dashboard', label: '📊 Дашборд' },
-            { key: 'bookings', label: '📅 Записи' },
-            { key: 'masters', label: '💅 Мастера' },
-            { key: 'crm', label: '👥 CRM' },
-            { key: 'codes', label: '🔑 Коды' },
-            { key: 'services', label: '🛠 Услуги' },
-            { key: 'categories', label: '📁 Категории' }
+            { key: 'dashboard', label: 'Дашборд', icon: AdminIcons.dashboard },
+            { key: 'bookings', label: 'Записи', icon: AdminIcons.calendar },
+            { key: 'masters', label: 'Мастера', icon: AdminIcons.masters },
+            { key: 'crm', label: 'CRM', icon: AdminIcons.users },
+            { key: 'codes', label: 'Коды', icon: AdminIcons.key },
+            { key: 'services', label: 'Услуги', icon: AdminIcons.scissors },
+            { key: 'categories', label: 'Категории', icon: AdminIcons.folder }
           ].map(tab => `
             <button class="master-tab ${this.activeTab === tab.key ? 'active' : ''}"
                     onclick="AdminPage.switchTab('${tab.key}')"
-                    style="white-space:nowrap;padding:14px 16px;font-size:var(--font-size-sm)">
-              ${tab.label}
+                    style="white-space:nowrap;padding:14px 16px;font-size:var(--font-size-sm);display:inline-flex;align-items:center;gap:6px">
+              <span style="display:inline-flex;color:#FF69B4">${tab.icon}</span> ${tab.label}
             </button>
           `).join('')}
         </div>
@@ -139,7 +158,7 @@ const AdminPage = {
         </div>
       `;
     } catch (e) {
-      container.innerHTML = EmptyState.render('⚠️', 'Ошибка загрузки', e.message);
+      container.innerHTML = EmptyState.render(AdminIcons.warning, 'Ошибка загрузки', e.message);
     }
   },
 
@@ -153,7 +172,7 @@ const AdminPage = {
       container.innerHTML = `
         <div style="padding:var(--space-md);display:flex;flex-direction:column;gap:var(--space-sm)">
           ${bookings.length === 0
-            ? EmptyState.render('📅', 'Нет записей', '')
+            ? EmptyState.render(AdminIcons.calendar, 'Нет записей', '')
             : bookings.map(b => `
               <div class="booking-card" onclick="App.navigate('booking-detail', { bookingId: ${b.id} })">
                 <div class="booking-card-header">
@@ -174,7 +193,7 @@ const AdminPage = {
         </div>
       `;
     } catch (e) {
-      container.innerHTML = EmptyState.render('⚠️', 'Ошибка', e.message);
+      container.innerHTML = EmptyState.render(AdminIcons.warning, 'Ошибка', e.message);
     }
   },
 
@@ -188,7 +207,7 @@ const AdminPage = {
       container.innerHTML = `
         <div style="padding:var(--space-md);display:flex;flex-direction:column;gap:var(--space-sm)">
           ${users.length === 0
-            ? EmptyState.render('💅', 'Нет мастеров', 'Создайте код доступа для мастера')
+            ? EmptyState.render(AdminIcons.masters, 'Нет мастеров', 'Создайте код доступа для мастера')
             : users.map(u => `
               <div class="card">
                 <div class="card-body">
@@ -213,7 +232,7 @@ const AdminPage = {
         </div>
       `;
     } catch (e) {
-      container.innerHTML = EmptyState.render('⚠️', 'Ошибка', e.message);
+      container.innerHTML = EmptyState.render(AdminIcons.warning, 'Ошибка', e.message);
     }
   },
 
@@ -227,7 +246,7 @@ const AdminPage = {
       container.innerHTML = `
         <div style="padding:var(--space-md);display:flex;flex-direction:column;gap:var(--space-sm)">
           ${clients.length === 0
-            ? EmptyState.render('👥', 'Нет клиентов', '')
+            ? EmptyState.render(AdminIcons.users, 'Нет клиентов', '')
             : clients.map(c => `
               <div class="card" onclick="AdminPage.openClientModal(${c.id})">
                 <div class="card-body">
@@ -251,7 +270,7 @@ const AdminPage = {
       `;
       this._clients = clients;
     } catch (e) {
-      container.innerHTML = EmptyState.render('⚠️', 'Ошибка', e.message);
+      container.innerHTML = EmptyState.render(AdminIcons.warning, 'Ошибка', e.message);
     }
   },
 
@@ -310,7 +329,7 @@ const AdminPage = {
           </button>
           <div style="display:flex;flex-direction:column;gap:var(--space-sm)">
             ${codes.length === 0
-              ? EmptyState.render('🔑', 'Нет кодов', 'Создайте код для нового мастера')
+              ? EmptyState.render(AdminIcons.key, 'Нет кодов', 'Создайте код для нового мастера')
               : codes.map(code => `
                 <div class="card">
                   <div class="card-body">
@@ -324,8 +343,8 @@ const AdminPage = {
                       </div>
                       <div style="display:flex;gap:8px;align-items:center">
                         ${code.is_active && !code.used_by ? `
-                          <button class="btn btn-ghost btn-sm" onclick="AdminPage.copyCode('${code.code}')">📋</button>
-                          <button class="btn btn-danger btn-sm" onclick="AdminPage.deleteCode(${code.id})">✕</button>
+                          <button class="btn btn-ghost btn-sm" onclick="AdminPage.copyCode('${code.code}')">${AdminIcons.copy}</button>
+                          <button class="btn btn-danger btn-sm" onclick="AdminPage.deleteCode(${code.id})">${AdminIcons.x}</button>
                         ` : ''}
                       </div>
                     </div>
@@ -336,7 +355,7 @@ const AdminPage = {
         </div>
       `;
     } catch (e) {
-      container.innerHTML = EmptyState.render('⚠️', 'Ошибка', e.message);
+      container.innerHTML = EmptyState.render(AdminIcons.warning, 'Ошибка', e.message);
     }
   },
 
@@ -379,18 +398,20 @@ const AdminPage = {
           </button>
           <div style="display:flex;flex-direction:column;gap:var(--space-sm)">
             ${services.map(s => `
-              <div class="service-card-old">
-                <div class="service-icon">${Utils.getCategoryInfo(s.category).emoji}</div>
-                <div class="service-info">
-                  <div class="service-name">${s.name}</div>
-                  <div class="service-meta">${Utils.formatDuration(s.duration_minutes)}</div>
+              <div class="admin-service-card">
+                <div class="admin-service-top">
+                  <div class="admin-service-icon"><span style="display:inline-flex;color:#FF69B4">${AdminIcons.scissors}</span></div>
+                  <div class="admin-service-info">
+                    <div class="admin-service-name">${s.name}</div>
+                    <div class="admin-service-meta">${Utils.formatDuration(s.duration_minutes)}</div>
+                  </div>
+                  <div class="admin-service-price">${Utils.formatPrice(s.price)}</div>
                 </div>
-                <div style="display:flex;align-items:center;gap:8px">
-                  <div class="service-price">${Utils.formatPrice(s.price)}</div>
-                  <button class="btn btn-ghost btn-sm" onclick="AdminPage.editServiceModal(${s.id})">✏️</button>
-                  <button class="btn btn-ghost btn-sm" onclick="AdminPage.deleteService(${s.id})">🗑</button>
+                <div class="admin-service-actions">
+                  <button class="btn btn-ghost btn-sm" onclick="AdminPage.editServiceModal(${s.id})">${AdminIcons.edit}</button>
+                  <button class="btn btn-ghost btn-sm" onclick="AdminPage.deleteService(${s.id})">${AdminIcons.trash}</button>
                   <button class="btn btn-ghost btn-sm" onclick="AdminPage.toggleService(${s.id}, ${s.is_active})" style="color:${s.is_active ? 'var(--color-success)' : 'var(--color-error)'}">
-                    ${s.is_active ? '✓' : '✕'}
+                    ${s.is_active ? AdminIcons.check : AdminIcons.x}
                   </button>
                 </div>
               </div>
@@ -399,7 +420,7 @@ const AdminPage = {
         </div>
       `;
     } catch (e) {
-      container.innerHTML = EmptyState.render('⚠️', 'Ошибка', e.message);
+      container.innerHTML = EmptyState.render(AdminIcons.warning, 'Ошибка', e.message);
     }
   },
 
@@ -425,7 +446,7 @@ const AdminPage = {
           <label class="form-label">Категория</label>
           <select class="form-input form-select" id="svc-category">
             ${categories.map((cat) =>
-              `<option value="${cat.key}">${cat.emoji || '💆'} ${cat.name}</option>`
+              `<option value="${cat.key}">${cat.name}</option>`
             ).join('')}
           </select>
         </div>
@@ -488,7 +509,7 @@ const AdminPage = {
         <div style="display:flex;flex-direction:column;gap:var(--space-md)">
           <input class="form-input" id="svc-edit-name" value="${service.name}">
           <select class="form-input form-select" id="svc-edit-category">
-            ${categories.map(c => `<option value="${c.key}" ${c.key === service.category ? 'selected' : ''}>${c.emoji || '💆'} ${c.name}</option>`).join('')}
+            ${categories.map(c => `<option value="${c.key}" ${c.key === service.category ? 'selected' : ''}>${c.name}</option>`).join('')}
           </select>
           <input class="form-input" id="svc-edit-duration" type="number" value="${service.duration_minutes}">
           <input class="form-input" id="svc-edit-price" type="number" value="${service.price}">
@@ -580,11 +601,11 @@ const AdminPage = {
                         </div>
                       </div>
                       <div style="display:flex;gap:6px;flex-wrap:wrap">
-                        <button class="btn btn-ghost btn-sm" onclick="AdminPage.editCategoryPrompt(${cat.id}, '${cat.name.replace(/'/g, '&#39;')}')">✏️</button>
-                        <button class="btn btn-ghost btn-sm" onclick="AdminPage.deleteCategory(${cat.id})">🗑</button>
+                        <button class="btn btn-ghost btn-sm" onclick="AdminPage.editCategoryPrompt(${cat.id}, '${cat.name.replace(/'/g, '&#39;')}')">${AdminIcons.edit}</button>
+                        <button class="btn btn-ghost btn-sm" onclick="AdminPage.deleteCategory(${cat.id})">${AdminIcons.trash}</button>
                       </div>
                       <label class="file-upload-btn" style="cursor:pointer;padding:8px 12px;background:var(--color-bg-secondary);border-radius:var(--radius-sm);font-size:var(--font-size-sm);color:var(--color-primary);font-weight:500">
-                        📷 Фото
+                        ${AdminIcons.camera} Фото
                         <input type="file" accept="image/*" style="display:none" onchange="AdminPage.uploadCategoryImage('${cat.key}', this)">
                       </label>
                     </div>
@@ -596,7 +617,7 @@ const AdminPage = {
         </div>
       `;
     } catch (e) {
-      container.innerHTML = EmptyState.render('⚠️', 'Ошибка', e.message);
+      container.innerHTML = EmptyState.render(AdminIcons.warning, 'Ошибка', e.message);
     }
   },
 

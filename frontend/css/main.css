@@ -594,6 +594,69 @@ a {
   box-shadow: 0 4px 12px rgba(255, 105, 180, 0.1);
 }
 
+/* Admin service card - two-row layout for mobile */
+.admin-service-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-lg);
+  padding: var(--space-md);
+  box-shadow: var(--shadow-sm);
+  border: 1px solid var(--color-border-light);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.admin-service-top {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.admin-service-icon {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 50%;
+  background: #FFE0EE;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.admin-service-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.admin-service-name {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-text-primary);
+  word-wrap: break-word;
+}
+
+.admin-service-meta {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.admin-service-price {
+  font-size: var(--font-size-base);
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.admin-service-actions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: flex-end;
+  border-top: 1px solid var(--color-border-light);
+  padding-top: var(--space-sm);
+}
+
 .service-info {
   flex: 1;
   min-width: 0;

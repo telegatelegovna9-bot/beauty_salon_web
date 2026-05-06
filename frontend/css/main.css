@@ -1819,27 +1819,67 @@ a {
   }
 }
 
-/* Master card specific styles */
-.master-card-header {
+/* Master detail card styles */
+.master-detail-card {
+  background: white;
+  margin: var(--space-xs) var(--space-xs) var(--space-sm);
+  padding: var(--space-lg) var(--space-sm) var(--space-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: var(--space-xs);
+  border-radius: var(--radius-xl);
+  box-shadow: 0 2px 16px rgba(255, 105, 180, 0.1);
+  position: relative;
 }
 
-.master-card-rating {
+.master-detail-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 80px;
+  background: linear-gradient(180deg, #FFE8F0 0%, rgba(255, 232, 240, 0) 100%);
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+  pointer-events: none;
+}
+
+.master-card-avatar-area {
+  position: relative;
+  margin-bottom: var(--space-xs);
+  z-index: 1;
+}
+
+.master-card-avatar-area .profile-avatar {
+  width: 100px;
+  height: 100px;
+  border: 3px solid #FF69B4;
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.8);
+}
+
+.master-card-rating-badge {
+  position: absolute;
+  bottom: 2px;
+  right: -4px;
+  background: #FF69B4;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 3px 8px;
+  border-radius: var(--radius-full);
   display: inline-flex;
   align-items: center;
-  gap: 4px;
-  font-size: var(--font-size-sm);
-  margin-top: 2px;
+  gap: 3px;
+  box-shadow: 0 2px 6px rgba(255, 105, 180, 0.3);
+  border: 2px solid white;
 }
 
-.master-card-rating-value {
-  font-weight: 700;
-  color: #FF1493;
-}
-
-.master-card-rating-count {
-  color: #B0A0B0;
-  font-size: var(--font-size-xs);
+.master-card-name {
+  font-size: var(--font-size-xl);
+  font-weight: 800;
+  color: var(--color-text-primary);
+  z-index: 1;
 }
 
 .master-card-specs {
@@ -1847,37 +1887,60 @@ a {
   flex-wrap: wrap;
   justify-content: center;
   gap: 6px;
-  margin-top: var(--space-xs);
-  max-width: 100%;
-  padding: 0 var(--space-sm);
+  width: 100%;
+  z-index: 1;
 }
 
 .master-card-spec-tag {
-  background: rgba(255, 255, 255, 0.6);
+  background: linear-gradient(135deg, #FFEAF2 0%, #FFD6E7 100%);
   color: #D6006E;
-  font-size: 11px;
+  font-size: 12px;
   font-weight: 600;
-  padding: 4px 10px;
+  padding: 4px 12px;
   border-radius: var(--radius-full);
   white-space: nowrap;
-  letter-spacing: 0.02em;
+  line-height: 1.2;
+}
+
+.master-card-info-line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  width: 100%;
+  z-index: 1;
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.master-card-info-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  white-space: nowrap;
+}
+
+.master-card-info-item strong {
+  color: var(--color-text-primary);
+  font-weight: 700;
+}
+
+.master-card-info-sep {
+  color: #CCC;
+  margin: 0 2px;
 }
 
 .master-card-bio {
-  color: #7A6A7A;
+  color: var(--color-text-secondary);
   font-size: var(--font-size-sm);
-  line-height: 1.5;
+  line-height: 1.6;
   text-align: center;
-  max-width: 280px;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  margin-top: var(--space-xs);
+  width: 100%;
+  z-index: 1;
 }
 
 .master-card-book-btn {
-  margin-top: var(--space-sm);
+  margin-top: var(--space-xs);
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -1885,6 +1948,17 @@ a {
   font-size: var(--font-size-base);
   font-weight: 600;
   border-radius: var(--radius-full);
+  z-index: 1;
+}
+
+@media (min-width: 400px) {
+  .master-detail-card {
+    margin: var(--space-sm) var(--space-sm) var(--space-md);
+    padding: var(--space-xl) var(--space-lg) var(--space-lg);
+  }
+  .master-card-info-line {
+    font-size: var(--font-size-sm);
+  }
 }
 
 /* ============================================

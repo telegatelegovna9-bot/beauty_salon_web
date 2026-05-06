@@ -27,27 +27,38 @@ const MasterDetailPage = {
       const name = master.display_name || Utils.getMasterName(master);
       const specs = Array.isArray(master.specializations) ? master.specializations : [];
 
+      const reviewsText = master.reviews_count === 1 ? 'отзыв' : (master.reviews_count < 5 ? 'отзыва' : 'отзывов');
+      const expText = master.experience_years ? `${master.experience_years} лет опыта` : '';
+
       container.innerHTML = `
         <!-- Master Header -->
-        <div class="profile-header master-card-header">
-          <div class="profile-avatar-wrapper">
+        <div class="master-detail-card">
+          <div class="master-card-avatar-area">
             <div class="profile-avatar" style="overflow:hidden">
               ${master.avatar_url
                 ? `<img src="${master.avatar_url}" alt="${name}" style="width:100%;height:100%;object-fit:cover">`
                 : Utils.getInitials(name)}
             </div>
+            ${master.rating ? `
+              <div class="master-card-rating-badge">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="white" stroke="white" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                ${master.rating.toFixed(1)}
+              </div>
+            ` : ''}
           </div>
-          <div class="profile-name">${name}</div>
-          ${master.rating ? `
-            <div class="master-card-rating">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="#FF69B4" stroke="#FF69B4" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-              <span class="master-card-rating-value">${master.rating.toFixed(1)}</span>
-              <span class="master-card-rating-count">(${master.reviews_count} отзывов)</span>
-            </div>
-          ` : ''}
+          <div class="master-card-name">${name}</div>
           ${specs.length > 0 ? `
             <div class="master-card-specs">
               ${specs.map(s => `<span class="master-card-spec-tag">${s}</span>`).join('')}
+            </div>
+          ` : ''}
+          ${master.rating || expText ? `
+            <div class="master-card-info-line">
+              ${master.rating ? `<span class="master-card-info-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="#FF69B4" stroke="#FF69B4" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> <strong>${master.rating.toFixed(1)}</strong></span>
+              <span class="master-card-info-sep">·</span>
+              <span class="master-card-info-item">${master.reviews_count} ${reviewsText}</span>` : ''}
+              ${master.rating && expText ? `<span class="master-card-info-sep">·</span>` : ''}
+              ${expText ? `<span class="master-card-info-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF69B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="12" x2="16" y2="12"/></svg> ${expText}</span>` : ''}
             </div>
           ` : ''}
           ${master.bio ? `<div class="master-card-bio">${master.bio}</div>` : ''}

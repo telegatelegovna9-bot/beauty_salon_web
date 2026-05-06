@@ -1822,64 +1822,51 @@ a {
 /* Master detail card styles */
 .master-detail-card {
   background: white;
-  margin: var(--space-xs) var(--space-xs) var(--space-sm);
-  padding: var(--space-lg) var(--space-sm) var(--space-md);
+  padding: var(--space-lg) var(--space-md) var(--space-md);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: var(--space-xs);
-  border-radius: var(--radius-xl);
-  box-shadow: 0 2px 16px rgba(255, 105, 180, 0.1);
-  position: relative;
-}
-
-.master-detail-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 80px;
-  background: linear-gradient(180deg, #FFE8F0 0%, rgba(255, 232, 240, 0) 100%);
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
-  pointer-events: none;
+  gap: 6px;
 }
 
 .master-card-avatar-area {
   position: relative;
   margin-bottom: var(--space-xs);
-  z-index: 1;
 }
 
-.master-card-avatar-area .profile-avatar {
+.master-card-avatar {
   width: 100px;
   height: 100px;
-  border: 3px solid #FF69B4;
-  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-full);
+  background: linear-gradient(135deg, #FFB6C1 0%, #FF69B4 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 32px;
+  color: white;
 }
 
 .master-card-rating-badge {
   position: absolute;
-  bottom: 2px;
-  right: -4px;
-  background: #FF69B4;
-  color: white;
+  bottom: 0;
+  right: -6px;
+  background: white;
+  color: #333;
   font-size: 11px;
   font-weight: 700;
-  padding: 3px 8px;
+  padding: 2px 7px;
   border-radius: var(--radius-full);
   display: inline-flex;
   align-items: center;
-  gap: 3px;
-  box-shadow: 0 2px 6px rgba(255, 105, 180, 0.3);
-  border: 2px solid white;
+  gap: 2px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.15);
 }
 
 .master-card-name {
-  font-size: var(--font-size-xl);
+  font-size: 20px;
   font-weight: 800;
   color: var(--color-text-primary);
-  z-index: 1;
 }
 
 .master-card-specs {
@@ -1888,28 +1875,26 @@ a {
   justify-content: center;
   gap: 6px;
   width: 100%;
-  z-index: 1;
+  padding: 2px 0;
 }
 
 .master-card-spec-tag {
-  background: linear-gradient(135deg, #FFEAF2 0%, #FFD6E7 100%);
-  color: #D6006E;
+  background: #FFE8F2;
+  color: #E91E8C;
   font-size: 12px;
   font-weight: 600;
-  padding: 4px 12px;
+  padding: 4px 14px;
   border-radius: var(--radius-full);
   white-space: nowrap;
-  line-height: 1.2;
 }
 
 .master-card-info-line {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 3px;
+  gap: 4px;
   width: 100%;
-  z-index: 1;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--color-text-secondary);
 }
 
@@ -1926,8 +1911,8 @@ a {
 }
 
 .master-card-info-sep {
-  color: #CCC;
-  margin: 0 2px;
+  color: #D0D0D0;
+  margin: 0 1px;
 }
 
 .master-card-bio {
@@ -1935,30 +1920,25 @@ a {
   font-size: var(--font-size-sm);
   line-height: 1.6;
   text-align: center;
-  width: 100%;
-  z-index: 1;
+  padding: 0 var(--space-sm);
+  margin-top: 2px;
 }
 
 .master-card-book-btn {
-  margin-top: var(--space-xs);
+  margin-top: var(--space-sm);
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 8px;
-  padding: 12px 32px;
-  font-size: var(--font-size-base);
+  padding: 12px 36px;
+  font-size: 15px;
   font-weight: 600;
   border-radius: var(--radius-full);
-  z-index: 1;
-}
-
-@media (min-width: 400px) {
-  .master-detail-card {
-    margin: var(--space-sm) var(--space-sm) var(--space-md);
-    padding: var(--space-xl) var(--space-lg) var(--space-lg);
-  }
-  .master-card-info-line {
-    font-size: var(--font-size-sm);
-  }
+  background: linear-gradient(135deg, #FF69B4 0%, #FF1493 100%);
+  color: white;
+  border: none;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(255, 105, 180, 0.3);
 }
 
 /* ============================================

@@ -16,26 +16,36 @@ const ProfilePage = {
       <div class="page page-enter" id="profile-page">
         <!-- Profile Header -->
         <div class="profile-header">
-          <div style="position:relative;display:inline-block">
+          <div class="profile-avatar-wrapper">
             <div class="profile-avatar" style="overflow:hidden">${user.avatar_url ? `<img src="${user.avatar_url}" alt="${name}" style="width:100%;height:100%;object-fit:cover">` : initials}</div>
-            <label style="position:absolute;right:-6px;bottom:0;width:30px;height:30px;border-radius:50%;background:rgba(255,255,255,0.95);display:flex;align-items:center;justify-content:center;box-shadow:var(--shadow-sm);cursor:pointer;border:1px solid rgba(255,255,255,0.8)">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-primary)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+            <label class="profile-avatar-camera">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
               <input type="file" accept="image/*" style="display:none" onchange="ProfilePage.uploadAvatar(this)">
             </label>
           </div>
           <div class="profile-name">${name}</div>
           <div class="profile-role">${roleInfo.icon} ${roleInfo.label}</div>
-          ${user.username ? `<div style="color:rgba(255,255,255,0.5);font-size:var(--font-size-sm)">@${user.username}</div>` : ''}
+          ${user.username ? `<div class="profile-username">@${user.username}</div>` : ''}
 
           ${clientProfile ? `
             <div class="profile-stats">
               <div class="profile-stat">
-                <div class="profile-stat-value">${clientProfile.total_visits || 0}</div>
-                <div class="profile-stat-label">Визитов</div>
+                <div class="profile-stat-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF69B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                </div>
+                <div class="profile-stat-info">
+                  <div class="profile-stat-value">${clientProfile.total_visits || 0}</div>
+                  <div class="profile-stat-label">Визитов</div>
+                </div>
               </div>
               <div class="profile-stat">
-                <div class="profile-stat-value">${clientProfile.total_spent ? Math.round(clientProfile.total_spent / 1000) + 'k' : '0'}</div>
-                <div class="profile-stat-label">Потрачено ₽</div>
+                <div class="profile-stat-icon">
+                  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#FF69B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg>
+                </div>
+                <div class="profile-stat-info">
+                  <div class="profile-stat-value">${clientProfile.total_spent ? Math.round(clientProfile.total_spent / 1000) + 'k' : '0'}</div>
+                  <div class="profile-stat-label">Потрачено ₽</div>
+                </div>
               </div>
             </div>
           ` : ''}

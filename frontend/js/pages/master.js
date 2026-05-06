@@ -27,26 +27,44 @@ const MasterDetailPage = {
       const name = master.display_name || Utils.getMasterName(master);
       const specs = Array.isArray(master.specializations) ? master.specializations : [];
 
+      const reviewsText = master.reviews_count === 1 ? 'отзыв' : (master.reviews_count < 5 ? 'отзыва' : 'отзывов');
+      const expText = master.experience_years ? `${master.experience_years} лет опыта` : '';
+
       container.innerHTML = `
         <!-- Master Header -->
-        <div style="background:linear-gradient(135deg,#FFB6C1,#FF69B4);padding:var(--space-xl) var(--space-md);color:white;text-align:center">
-          <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#FFB6C1,#FF69B4);display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;color:white;border:2px solid rgba(255,105,180,0.4);margin:0 auto var(--space-md)">
-            ${master.avatar_url
-              ? `<img src="${master.avatar_url}" style="width:80px;height:80px;border-radius:50%;object-fit:cover">`
-              : Utils.getInitials(name)}
+        <div class="master-detail-card">
+          <div class="master-card-avatar-area">
+            <div class="master-card-avatar" style="overflow:hidden">
+              ${master.avatar_url
+                ? `<img src="${master.avatar_url}" alt="${name}" style="width:100%;height:100%;object-fit:cover">`
+                : Utils.getInitials(name)}
+            </div>
+            ${master.rating ? `
+              <div class="master-card-rating-badge">
+                <svg width="10" height="10" viewBox="0 0 24 24" fill="#FFB800" stroke="#FFB800" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                ${master.rating.toFixed(1)}
+              </div>
+            ` : ''}
           </div>
-          <div style="font-size:var(--font-size-xl);font-weight:700;margin-bottom:4px">${name}</div>
-          ${specs.length > 0 ? `<div style="color:var(--color-primary-light);font-size:var(--font-size-sm)">${specs.join(' · ')}</div>` : ''}
-          ${master.rating ? `
-            <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px">
-              <span style="color:var(--color-primary);font-size:18px">★</span>
-              <span style="font-weight:600">${master.rating.toFixed(1)}</span>
-              <span style="color:rgba(255,255,255,0.7)">(${master.reviews_count} отзывов)</span>
+          <div class="master-card-name">${name}</div>
+          ${specs.length > 0 ? `
+            <div class="master-card-specs">
+              ${specs.map(s => `<span class="master-card-spec-tag">${s}</span>`).join('')}
             </div>
           ` : ''}
-          ${master.bio ? `<div style="color:rgba(255,255,255,0.9);font-size:var(--font-size-sm);margin-top:var(--space-sm);line-height:1.6">${master.bio}</div>` : ''}
-          <button class="btn btn-primary" style="margin-top:var(--space-md)" onclick="App.navigate('book', { masterId: ${master.id} })">
-            💅 Записаться
+          ${master.rating || expText ? `
+            <div class="master-card-info-line">
+              ${master.rating ? `<span class="master-card-info-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="#FF69B4" stroke="#FF69B4" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg> <strong>${master.rating.toFixed(1)}</strong></span>
+              <span class="master-card-info-sep">·</span>
+              <span class="master-card-info-item">${master.reviews_count} ${reviewsText}</span>` : ''}
+              ${master.rating && expText ? `<span class="master-card-info-sep">·</span>` : ''}
+              ${expText ? `<span class="master-card-info-item"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FF69B4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="7" x2="12" y2="17"/><line x1="7" y1="12" x2="17" y2="12"/></svg> ${expText}</span>` : ''}
+            </div>
+          ` : ''}
+          ${master.bio ? `<div class="master-card-bio">${master.bio}</div>` : ''}
+          <button class="master-card-book-btn" onclick="App.navigate('book', { masterId: ${master.id} })">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+            Записаться
           </button>
         </div>
 

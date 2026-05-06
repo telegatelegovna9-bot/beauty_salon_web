@@ -27,38 +27,79 @@ const MasterDetailPage = {
       const name = master.display_name || Utils.getMasterName(master);
       const specs = Array.isArray(master.specializations) ? master.specializations : [];
 
+      const exp = Number(master.experience_years) || 0;
+      const expLabel = exp > 0
+        ? `${exp} ${exp === 1 ? 'год' : (exp >= 2 && exp <= 4 ? 'года' : 'лет')} опыта`
+        : '';
+
       container.innerHTML = `
-        <!-- Master Header -->
-        <div style="background:linear-gradient(135deg,#FFB6C1,#FF69B4);padding:var(--space-xl) var(--space-md);color:white;text-align:center">
-          <div style="width:80px;height:80px;border-radius:50%;background:linear-gradient(135deg,#FFB6C1,#FF69B4);display:flex;align-items:center;justify-content:center;font-size:32px;font-weight:700;color:white;border:2px solid rgba(255,105,180,0.4);margin:0 auto var(--space-md)">
-            ${master.avatar_url
-              ? `<img src="${master.avatar_url}" style="width:80px;height:80px;border-radius:50%;object-fit:cover">`
-              : Utils.getInitials(name)}
+        <!-- Master Hero -->
+        <div class="master-hero">
+          <div class="master-hero-bg" aria-hidden="true">
+            <span class="master-hero-blob master-hero-blob-1"></span>
+            <span class="master-hero-blob master-hero-blob-2"></span>
           </div>
-          <div style="font-size:var(--font-size-xl);font-weight:700;margin-bottom:4px">${name}</div>
-          ${specs.length > 0 ? `<div style="color:var(--color-primary-light);font-size:var(--font-size-sm)">${specs.join(' · ')}</div>` : ''}
-          ${master.rating ? `
-            <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-top:8px">
-              <span style="color:var(--color-primary);font-size:18px">★</span>
-              <span style="font-weight:600">${master.rating.toFixed(1)}</span>
-              <span style="color:rgba(255,255,255,0.7)">(${master.reviews_count} отзывов)</span>
+
+          <div class="master-hero-card">
+            <div class="master-hero-avatar-ring">
+              <div class="master-hero-avatar">
+                ${master.avatar_url
+                  ? `<img src="${master.avatar_url}" alt="${name}">`
+                  : `<span>${Utils.getInitials(name)}</span>`}
+              </div>
+              ${master.rating ? `
+                <div class="master-hero-rating-badge">
+                  <span class="master-hero-rating-star">★</span>
+                  <span>${master.rating.toFixed(1)}</span>
+                </div>
+              ` : ''}
             </div>
-          ` : ''}
-          ${master.bio ? `<div style="color:rgba(255,255,255,0.9);font-size:var(--font-size-sm);margin-top:var(--space-sm);line-height:1.6">${master.bio}</div>` : ''}
-          <button class="btn btn-primary" style="margin-top:var(--space-md)" onclick="App.navigate('book', { masterId: ${master.id} })">
-            💅 Записаться
-          </button>
+
+            <div class="master-hero-name">${name}</div>
+
+            ${specs.length > 0 ? `
+              <div class="master-hero-specs">
+                ${specs.map(s => `<span class="master-hero-spec-pill">${s}</span>`).join('')}
+              </div>
+            ` : ''}
+
+            ${(master.rating || expLabel) ? `
+              <div class="master-hero-meta">
+                ${master.rating ? `
+                  <span class="master-hero-meta-item">
+                    <span class="master-hero-meta-icon" style="color:#F5B800">★</span>
+                    <strong>${master.rating.toFixed(1)}</strong>
+                    <span class="master-hero-meta-muted">· ${master.reviews_count} ${this.declOfReviews(master.reviews_count || 0)}</span>
+                  </span>
+                ` : ''}
+                ${expLabel ? `
+                  <span class="master-hero-meta-divider">·</span>
+                  <span class="master-hero-meta-item">
+                    <span class="master-hero-meta-icon">✦</span>
+                    ${expLabel}
+                  </span>
+                ` : ''}
+              </div>
+            ` : ''}
+
+            ${master.bio ? `<p class="master-hero-bio">${master.bio}</p>` : ''}
+
+            <button class="btn btn-primary master-hero-cta" onclick="App.navigate('book', { masterId: ${master.id} })">
+              <span class="master-hero-cta-icon" aria-hidden="true">📅</span>
+              <span>Записаться</span>
+            </button>
+          </div>
         </div>
 
         <!-- Tabs -->
-        <div style="display:flex;border-bottom:1px solid var(--color-border-light);background:var(--color-surface)">
+        <div class="master-tabs">
           <button class="master-tab active" data-tab="services" onclick="MasterDetailPage.switchTab('services')">Услуги</button>
           <button class="master-tab" data-tab="portfolio" onclick="MasterDetailPage.switchTab('portfolio')">Портфолио</button>
           <button class="master-tab" data-tab="reviews" onclick="MasterDetailPage.switchTab('reviews')">Отзывы</button>
         </div>
 
         <!-- Tab Content -->
-        <div id="master-tab-content" style="padding:var(--space-md)">
+        <div id="master-tab-content" class="master-tab-content">
           ${this.renderServicesTab(services)}
         </div>
       `;
@@ -70,6 +111,14 @@ const MasterDetailPage = {
     } catch (e) {
       container.innerHTML = EmptyState.render('⚠️', 'Ошибка загрузки', e.message);
     }
+  },
+
+  declOfReviews(n) {
+    const mod10 = n % 10;
+    const mod100 = n % 100;
+    if (mod10 === 1 && mod100 !== 11) return 'отзыв';
+    if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return 'отзыва';
+    return 'отзывов';
   },
 
   switchTab(tab) {

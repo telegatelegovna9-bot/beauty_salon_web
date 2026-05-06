@@ -1822,11 +1822,14 @@ a {
 /* Master detail card styles */
 .master-detail-card {
   background: white;
+  margin: var(--space-sm) 10px var(--space-sm);
   padding: var(--space-lg) var(--space-md) var(--space-md);
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 6px;
+  border-radius: 20px;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
 }
 
 .master-card-avatar-area {
